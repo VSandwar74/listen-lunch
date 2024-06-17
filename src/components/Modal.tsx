@@ -31,7 +31,7 @@ const Modal = (spot: Spot) => {
   const user = auth.currentUser;
 
   const handleVoting = async (uid: string | undefined) => {
-    const ballotRef = doc(db, "restaurants")
+    const ballotRef = doc(db, "restaurants", spot.name)
     await setDoc(ballotRef, { users: [] }, { merge: true });
 
     // Add the UID to the set (assuming "users" is the field name for the set)

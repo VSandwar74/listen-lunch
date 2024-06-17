@@ -1,13 +1,16 @@
 // import React from 'react'
 // import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useState } from "react";
+import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from "firebase/auth";
 import * as firebase from '../services/firebase.ts';
+import { set } from "firebase/database";
 
 
 const Header = () => {
     // const app = initializeApp(firebaseConfig);
     // const auth = getAuth(app);
     const { auth } = firebase;
+    const [loggedIn, setLoggedIn] = useState(false)
     const provider = new GoogleAuthProvider();
     // provider.setCustomParameters({ prompt: 'select_account' });
     provider.setCustomParameters({
@@ -15,6 +18,24 @@ const Header = () => {
         login_hint: 'name@listen.co'
       });
     const user = auth.currentUser;
+
+    const signInWithGoogle = async () => {
+        signInWithRedirect(auth, provider)
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in
+          console.log('User is signed in:', user);
+          setLoggedIn(true);
+          // Update your UI to reflect the logged-in state
+        } else {
+          // User is signed out
+          console.log('User is signed out');
+          setLoggedIn(false);
+          // Update your UI to reflect the logged-out state
+        }
+      });
 
     return (
     <div className='absolute flex flex-row justify-between w-full top-0 h-10 text-white items-center p-8'>
@@ -36,10 +57,10 @@ const Header = () => {
         
         {/* User Icon */}
         <div className='flex flex-col'>
-            {user !== null ? (
+            {loggedIn ? (
                 <p className='text-white bold w-50'>Welcome {user?.displayName?.split(" ")[0]}!</p>
             ) : (
-                <a onClick={() => signInWithPopup(auth, provider)}>
+                <a onClick={() => signInWithGoogle()}>
                     <p className='text-white italic w-20 cursor-pointer hover:text-yellow-500'>Sign in!</p>
                 </a>
             )}
