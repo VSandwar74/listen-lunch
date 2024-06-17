@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBNe5YjwNWQ6YVSKQq1ANy4rg8Lw4DXo1w",
-    authDomain: "https://listen-lunch-7j11.vercel.app/",
+    authDomain: "listen-59b63.firebaseapp.com",
     projectId: "listen-59b63",
     storageBucket: "listen-59b63.appspot.com",
     messagingSenderId: "750142558083",
