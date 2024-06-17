@@ -1,5 +1,6 @@
 import { useState } from "react";
 import * as firebase from "../services/firebase.ts";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 interface Spot {
   ref: any;
@@ -10,6 +11,7 @@ interface Spot {
   tags: string[];
   known_for: string;
   menu: string;
+  votes: string[];
 }
 
 // const restaurant: Restaurant = {
@@ -23,10 +25,18 @@ interface Spot {
 // };
 
 const Modal = (spot: Spot) => {
-  const { auth } = firebase;
+  const { auth, db } = firebase;
   const [showModal, setShowModal] = useState(false);
 
   const user = auth.currentUser;
+
+  const handleVoting = async (uid: string | undefined) => {
+    const ballotRef = doc(db, "restaurants")
+    await setDoc(ballotRef, { users: [] }, { merge: true });
+
+    // Add the UID to the set (assuming "users" is the field name for the set)
+    await addDoc(collection(ballotRef, "users"), { uid });
+  }
 
   return (
     <>
@@ -60,7 +70,11 @@ const Modal = (spot: Spot) => {
                       ))}
                     </ul>
                     <p>known for: {spot.known_for}</p>
-                    {{user} ? (<button className="px-4 py-6 rounded-lg bg-yellow-400 cursor-pointer shadow-lg">
+                    {{user} ? 
+                    (<button 
+                      className="px-4 py-6 rounded-lg bg-yellow-400 cursor-pointer shadow-lg"
+                      onClick={() => handleVoting(user?.uid)}
+                    >
                       yes! i want to eat here
                     </button>): null}
                     <a 

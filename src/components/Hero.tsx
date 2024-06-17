@@ -13,6 +13,7 @@ interface Spot {
   tags: string[];
   known_for: string;
   menu: string;
+  votes: string[];
 }
 
 const Hero = () => {
