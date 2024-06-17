@@ -1,6 +1,6 @@
 // import React from 'react'
 // import { initializeApp } from "firebase/app";
-import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import * as firebase from '../services/firebase.ts';
 
 
@@ -37,7 +37,7 @@ const Header = () => {
             {user !== null ? (
                 <p className='text-white bold w-50'>Welcome {user?.displayName?.split(" ")[0]}!</p>
             ) : (
-                <a onClick={() => signInWithRedirect(auth, provider)}>
+                <a onClick={() => signInWithPopup(auth, provider)}>
                     <p className='text-white italic w-20 cursor-pointer hover:text-yellow-500'>Sign in!</p>
                 </a>
             )}
