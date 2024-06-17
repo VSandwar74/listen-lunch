@@ -1,0 +1,54 @@
+{
+    "restaurants": [
+        {
+            "name": "Beatrix",
+            "address": "834 W Fulton Market",
+            "distance": ".2 mi",
+            "description": "Upscale restaurant serving New American cuisine in a stylish setting.",
+            "tags": ["Vegan Friendly", "Outdoor Seating"],
+            "known_for": "Brunch, pastries, hot bar",
+            "menu": "https://www.beatrixrestaurants.com/beatrix/streeterville/menus/",
+            "votes": 0
+        },
+        {
+            "name": "Lonesome Rose",
+            "address": "2101 N California Ave",
+            "distance": "4.0 mi",
+            "description": "Creative Mexican & Tex-Mex fare & craft cocktails in a stylized warehouse setting with two bars.",
+            "tags": ["Tex Mex"],
+            "known_for": "Brunch",
+            "menu": "https://static1.squarespace.com/static/633b3e4bc65b9761129ccd48/t/6650b59c25496b4c5c5e89e8/1716565405799/LR+-+Main+-+05+23+2024.pdf",
+            "votes": 0
+        },
+        {
+            "name": "Nandos",
+            "address": "953 W Randolph St",
+            "distance": ".4 mi",
+            "description": "South African multinational fast casual chain that specialises in Portuguese flame-grilled peri-peri style chicken.",
+            "tags": ["Chicken", "Fast Casual"],
+            "known_for": "Flame-grilled chicken",
+            "menu": "https://www.nandosperiperi.com/menu/",
+            "votes": 0
+        },
+        {
+            "name": "Green St Meats",
+            "address": "112 N Green St",
+            "distance": ".5 mi",
+            "description": "Hip counter serve dishing house-smoked Texas BBQ & homey sides in woodsy, warehouselike digs.",
+            "tags": ["BBQ", "Meats"],
+            "known_for": "Classic BBQ",
+            "menu": "https://greenstreetmeats.com/menu/",
+            "votes": 0
+        },
+        {
+            "name": "McDonalds",
+            "address": "1380 W Lake St",
+            "distance": ".5 mi",
+            "description": "It's McDonalds",
+            "tags": ["Fast Food"],
+            "known_for": "Everything",
+            "menu": "https://www.mcdonalds.com/us/en-us/full-menu.html",
+            "votes": 0
+        }
+    ]
+}
