@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from "firebase/auth";
 import * as firebase from '../services/firebase.ts';
-import { set } from "firebase/database";
 
 
 const Header = () => {
