@@ -1,5 +1,5 @@
-import React from 'react'
-import { initializeApp } from "firebase/app";
+// import React from 'react'
+// import { initializeApp } from "firebase/app";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import * as firebase from '../services/firebase.ts';
 
@@ -38,7 +38,7 @@ const Header = () => {
                 <p className='text-white bold w-50'>Welcome {user?.displayName?.split(" ")[0]}!</p>
             ) : (
                 <a onClick={() => signInWithPopup(auth, provider)}>
-                    <p className='text-black italic w-20 cursor-pointer hover:text-blue-500'>Sign in!</p>
+                    <p className='text-white italic w-20 cursor-pointer hover:text-yellow-500'>Sign in!</p>
                 </a>
             )}
             <div className='flex flex-row text-white font-bold items-center'>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as firebase from "../services/firebase.ts";
 
 interface Spot {
   ref: any;
@@ -22,8 +23,11 @@ interface Spot {
 // };
 
 const Modal = (spot: Spot) => {
+  const { auth } = firebase;
   const [showModal, setShowModal] = useState(false);
-  console.log(showModal)
+
+  const user = auth.currentUser;
+
   return (
     <>
       <button
@@ -56,9 +60,9 @@ const Modal = (spot: Spot) => {
                       ))}
                     </ul>
                     <p>known for: {spot.known_for}</p>
-                    <button className="px-4 py-6 rounded-lg bg-yellow-400 cursor-pointer shadow-lg">
+                    {{user} ? (<button className="px-4 py-6 rounded-lg bg-yellow-400 cursor-pointer shadow-lg">
                       yes! i want to eat here
-                    </button>
+                    </button>): null}
                     <a 
                       className="px-6 py-2 bg-black text-white rounded-xl cursor-pointer"
                       href={spot.menu}

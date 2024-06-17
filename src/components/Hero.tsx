@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import Modal from './Modal'
-import restaurants from '../assets/spots.json'
 import * as firebase from '../services/firebase.ts'
-import { doc, writeBatch, query, collection, onSnapshot } from 'firebase/firestore'
+import { query, collection, onSnapshot } from 'firebase/firestore'
 
 
 interface Spot {
