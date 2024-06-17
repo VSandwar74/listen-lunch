@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as firebase from "../services/firebase.ts";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { updateDoc, arrayUnion, doc } from "firebase/firestore";
 
 interface Spot {
   ref: any;
@@ -31,11 +31,13 @@ const Modal = (spot: Spot) => {
   const user = auth.currentUser;
 
   const handleVoting = async (uid: string | undefined) => {
-    const ballotRef = doc(db, "restaurants", spot.name)
-    await setDoc(ballotRef, { users: [] }, { merge: true });
+    console.log('yip')
+    const docRef = doc(db, "restaurants", spot.name);
 
-    // Add the UID to the set (assuming "users" is the field name for the set)
-    await addDoc(collection(ballotRef, "users"), { uid });
+    // Update the document using a transaction for data consistency
+    await updateDoc(docRef, {
+      votes: arrayUnion(uid),
+    });
   }
 
   return (
@@ -57,7 +59,7 @@ const Modal = (spot: Spot) => {
             <div className="relative w-[30%] my-6 mx-auto max-w-3xl">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex flex-col justify-center p-5 rounded-t text-center w-full">
-                  <h3 className="text-4xl font=semibold">{spot.name}</h3>
+                  <h3 className="text-4xl font=semibold">{spot.name}: {spot.votes.length}</h3>
                   <div className="flex flex-col items-center space-y-3">
                     <div className="flex flex-row space-x-6 text-center items-center justify-center">
                       <p>{spot.address}</p>
