@@ -9,9 +9,11 @@ const Header = () => {
     // const auth = getAuth(app);
     const { auth } = firebase;
     const provider = new GoogleAuthProvider();
-    // provider.setCustomParameters({
-    //     'login_hint': 'name@listen.co'
-    //   });
+    // provider.setCustomParameters({ prompt: 'select_account' });
+    provider.setCustomParameters({
+        prompt: 'select_account',
+        login_hint: 'name@listen.co'
+      });
     const user = auth.currentUser;
 
     return (
