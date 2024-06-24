@@ -1,8 +1,9 @@
 // import React from 'react'
 // import { initializeApp } from "firebase/app";
 import { useState } from "react";
-import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from "firebase/auth";
+// import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from "firebase/auth";
 import * as firebase from '../services/firebase.ts';
+import { GoogleAuthProvider, User, signInWithRedirect } from "firebase/auth";
 
 
 const Header = () => {
@@ -12,29 +13,13 @@ const Header = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const provider = new GoogleAuthProvider();
     // provider.setCustomParameters({ prompt: 'select_account' });
-    provider.setCustomParameters({
-        prompt: 'select_account',
-        login_hint: 'name@listen.co'
-      });
-    const user = auth.currentUser;
+    // provider.setCustomParameters({
+    //     prompt: 'select_account',
+    //     login_hint: 'name@listen.co',
+    //     redirect_uri: 'https://listen-lunch.firebaseapp.com/__/auth/handler',
+    //   });
 
-    const signInWithGoogle = async () => {
-        signInWithRedirect(auth, provider)
-    }
-
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in
-          console.log('User is signed in:', user);
-          setLoggedIn(true);
-          // Update your UI to reflect the logged-in state
-        } else {
-          // User is signed out
-          console.log('User is signed out');
-          setLoggedIn(false);
-          // Update your UI to reflect the logged-out state
-        }
-      });
+    const [user, setUser] = useState<User | null>(null);
 
     return (
     <div className='absolute flex flex-row justify-between w-full top-0 h-10 text-white items-center p-8'>
@@ -59,7 +44,7 @@ const Header = () => {
             {loggedIn ? (
                 <p className='text-white bold w-50'>Welcome {user?.displayName?.split(" ")[0]}!</p>
             ) : (
-                <a onClick={() => signInWithGoogle()}>
+                <a onClick={() => signInWithRedirect(auth, provider)}>
                     <p className='text-white italic w-20 cursor-pointer hover:text-yellow-500'>Sign in!</p>
                 </a>
             )}
