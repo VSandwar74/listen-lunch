@@ -1,15 +1,16 @@
 // import React from 'react'
 // import { initializeApp } from "firebase/app";
 // import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from 'react';
 import * as firebase from '../services/firebase.ts';
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithRedirect } from "firebase/auth";
 
 
 const Header = () => {
     // const app = initializeApp(firebaseConfig);
     // const auth = getAuth(app);
     const { auth } = firebase;
-    // const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
     const provider = new GoogleAuthProvider();
     // provider.setCustomParameters({ prompt: 'select_account' });
     // provider.setCustomParameters({
@@ -20,7 +21,17 @@ const Header = () => {
 
     // const [user, setUser] = useState<User | null>(null);
     const user = auth?.currentUser;
-    const loggedIn = user !== null;
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setLoggedIn(true);
+            } else {
+                setLoggedIn(false);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
     return (
     <div className='absolute flex flex-row justify-between w-full top-0 h-10 text-white items-center p-8'>

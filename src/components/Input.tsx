@@ -1,25 +1,26 @@
 import { useState } from 'react'
-import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
+import * as firebase from '../services/firebase.ts'
 // import { doc, setDoc } from "firebase/firestore"; 
 // import { set } from 'firebase/database';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBNe5YjwNWQ6YVSKQq1ANy4rg8Lw4DXo1w",
-  authDomain: "listen-59b63.firebaseapp.com",
-  projectId: "listen-59b63",
-  storageBucket: "listen-59b63.appspot.com",
-  messagingSenderId: "750142558083",
-  appId: "1:750142558083:web:73b851d24e017e0ad070b6",
-  measurementId: "G-RRSYQ8NPKV"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBNe5YjwNWQ6YVSKQq1ANy4rg8Lw4DXo1w",
+//   authDomain: "listen-59b63.firebaseapp.com",
+//   projectId: "listen-59b63",
+//   storageBucket: "listen-59b63.appspot.com",
+//   messagingSenderId: "750142558083",
+//   appId: "1:750142558083:web:73b851d24e017e0ad070b6",
+//   measurementId: "G-RRSYQ8NPKV"
+// };
 
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+// const db = getFirestore(app);
 
 
 const Input = () => {
+  const { db } = firebase;
   const [spot, setSpot] = useState('')
 
   async function writeUserData(e: Event) {
@@ -42,6 +43,7 @@ const Input = () => {
           value={spot} 
           onChange={(e) => setSpot(e.target.value)}
           placeholder='What are you craving?' 
+          className='rounded=full'
           />
         <button type='submit'>Submit</button>
       </form>
